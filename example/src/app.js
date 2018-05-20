@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from "react";
-import delay from "../../src/delay";
+import delay from "../../src/utils/delay";
 import LoadableContext from "../../src/index";
 import Loading from "./loading";
 

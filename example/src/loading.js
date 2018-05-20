@@ -4,14 +4,14 @@ import * as React from "react";
 
 type Props = {
   retry?: mixed => mixed,
-  isLoading?: boolean,
+  loading?: boolean,
   error?: mixed,
   timedOut?: boolean,
   pastDelay?: boolean
 };
 
 export default function Loading(props: Props) {
-  if (props.isLoading) {
+  if (props.loading) {
     if (props.timedOut) {
       return (
         <div>

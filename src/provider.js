@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from "react";
-import delay from "./delay";
+import delay from "./utils/delay";
 
 type Props = {
   loader: mixed => Promise<mixed>,
@@ -9,25 +9,18 @@ type Props = {
   timeOut: number,
   children: React.Node,
   provider: React.ComponentType<{
-    value: mixed
-  }>,
-  loading: React.ComponentType<{
-    retry?: mixed => mixed,
-    isLoading?: boolean,
-    error?: mixed,
-    timedOut?: boolean,
-    pastDelay?: boolean
+    data: mixed
   }>
 };
 
 type State = {
-  value: mixed,
+  data: mixed,
   error: mixed,
   timedOut: boolean,
   pastDelay: boolean
 };
 
-export default class LoadableProvider extends React.Component<Props, State> {
+export default class Provider extends React.Component<Props, State> {
   startLoading: () => void;
   load: () => Promise<void>;
   manageDelay: () => Promise<void>;
@@ -44,7 +37,7 @@ export default class LoadableProvider extends React.Component<Props, State> {
     this.manageDelay = this._manageDelay.bind(this);
     this.manageTimeOut = this._manageTimeOut.bind(this);
     this.state = {
-      value: null,
+      data: null,
       error: null,
       timedOut: false,
       pastDelay: false
@@ -55,7 +48,7 @@ export default class LoadableProvider extends React.Component<Props, State> {
   }
   _startLoading() {
     this.setState({
-      value: null,
+      data: null,
       error: null,
       timedOut: false,
       pastDelay: false
@@ -67,14 +60,14 @@ export default class LoadableProvider extends React.Component<Props, State> {
   async _load() {
     try {
       const loaded = await this.props.loader(this.props);
-      this.setState({ value: loaded });
+      this.setState({ data: loaded });
     } catch (e) {
       this.setState({ error: e });
     }
   }
   async _manageDelay() {
     await delay(this.props.delay);
-    if (this.state.value !== null && this.state.value !== undefined) {
+    if (this.state.data !== null && this.state.data !== undefined) {
       return;
     } else {
       this.setState({ pastDelay: true });
@@ -82,29 +75,32 @@ export default class LoadableProvider extends React.Component<Props, State> {
   }
   async _manageTimeOut() {
     await delay(this.props.timeOut);
-    if (this.state.value !== null && this.state.value !== undefined) {
+    if (this.state.data !== null && this.state.data !== undefined) {
       return;
     } else {
       this.setState({ timedOut: true });
     }
   }
   render() {
-    if (this.state.value !== null && this.state.value !== undefined) {
-      const { provider: Provider, children } = this.props;
-      const { value } = this.state;
-      return <Provider value={value}>{children}</Provider>;
-    } else {
-      const { loading: Loading } = this.props;
-      const { error, timedOut, pastDelay } = this.state;
-      return (
-        <Loading
-          retry={this.startLoading}
-          isLoading={error === undefined || error === null}
-          error={error}
-          timedOut={timedOut}
-          pastDelay={pastDelay}
-        />
-      );
-    }
+    // if (this.state.data !== null && this.state.data !== undefined) {
+    const { provider: Provider, children } = this.props;
+    const { data, error, timedOut, pastDelay } = this.state;
+    return (
+      <Provider
+        value={{
+          data,
+          error,
+          loading:
+            !(data !== undefined && data !== null) &&
+            error !== undefined &&
+            error !== null,
+          timedOut,
+          pastDelay,
+          retry: this.startLoading
+        }}
+      >
+        {children}
+      </Provider>
+    );
   }
 }
