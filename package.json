@@ -1,0 +1,42 @@
+{
+  "name": "react-loadable-context",
+  "version": "1.0.0",
+  "description": "Asynchronously load object into react context",
+  "main": "index.js",
+  "scripts": {
+    "example-start": "webpack-dev-server --config ./webpack.config.js --mode development",
+    "example-build": "webpack --config ./webpack.config.js --mode production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crubier/react-loadable-context.git"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "Vincent Lecrubier <vincent.lecrubier@gmail.com> (http://www.vincentlecrubier.fr/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/crubier/react-loadable-context/issues"
+  },
+  "homepage": "https://github.com/crubier/react-loadable-context#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "react-hot-loader": "^4.2.0",
+    "webpack": "^4.8.3",
+    "webpack-cli": "^2.1.3",
+    "webpack-dev-server": "^3.1.4"
+  },
+  "dependencies": {
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
+  }
+}
