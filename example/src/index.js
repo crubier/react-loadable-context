@@ -1,10 +1,8 @@
 /* @flow */
-import * as React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from "react";
+import ReactDOM from "react-dom";
+import App from "./app";
 
-ReactDOM.render(
-  <div>React Loadable Context example</div>,
-  document.getElementById('app')
-);
+ReactDOM.render(<App />, document.getElementById("app"));
 
 module.hot.accept();
