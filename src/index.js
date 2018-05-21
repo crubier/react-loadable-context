@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from "react";
-import Provider from "./provider";
+import ProviderComponent from "./provider";
 import LoadingConsumerComponent from "./loadingConsumer";
 import DirectConsumerComponent from "./directConsumer";
 import { type Props as LoadingProps } from "./loading";
@@ -25,7 +25,7 @@ export default function LoadableContext({
     Consumer: RawConsumer
   } = React.createContext();
   const Provider = (props: mixed) => (
-    <Provider
+    <ProviderComponent
       provider={RawProvider}
       loader={loader}
       timeOut={timeOut}
@@ -41,14 +41,10 @@ export default function LoadableContext({
     />
   );
   const DirectConsumer = (props: mixed) => (
-    <DirectConsumerComponent
-      consumer={RawConsumer}
-      loading={loading}
-      {...props}
-    />
+    <DirectConsumerComponent consumer={RawConsumer} {...props} />
   );
   return {
-    Provider,
+    Provider: Provider,
     Consumer: DirectConsumer,
     DirectConsumer: DirectConsumer,
     LoadingConsumer: LoadingConsumer,

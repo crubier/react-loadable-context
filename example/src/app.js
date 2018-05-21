@@ -9,7 +9,6 @@ type Props = {};
 
 const { Provider: ProviderSimple, Consumer: ConsumerSimple } = LoadableContext({
   loader: async () => {
-    await delay(2000);
     return "Loaded simply.";
   }
 });
@@ -45,32 +44,35 @@ const { Provider: ProviderError, Consumer: ConsumerError } = LoadableContext({
 export default class App extends React.Component<Props> {
   render() {
     return (
-      <ProviderSimple>
-        <ProviderDelay>
-          <ProviderAsyncImport>
-            <ProviderError>
-              <div>
-                <p>
-                  Simple:
-                  <ConsumerSimple>{simpleThing => simpleThing}</ConsumerSimple>
-                </p>
-                <p>
-                  Simple:
-                  <ConsumerDelay>{thing => thing}</ConsumerDelay>
-                </p>
-                <p>
-                  Simple:
-                  <ConsumerAsyncImport>{thing => thing}</ConsumerAsyncImport>
-                </p>
-                <p>
-                  Simple:
-                  <ConsumerError>{thing => thing}</ConsumerError>
-                </p>
-              </div>
-            </ProviderError>
-          </ProviderAsyncImport>
-        </ProviderDelay>
-      </ProviderSimple>
+      <div>
+        <ProviderSimple>
+          <ProviderDelay>
+            <ProviderAsyncImport>
+              <ProviderError>
+                <div>
+                  Here are a few examples
+                  <p>
+                    Simple:
+                    <ConsumerSimple>{value => value}</ConsumerSimple>
+                  </p>
+                  <p>
+                    Delay:
+                    <ConsumerDelay>{thing => thing}</ConsumerDelay>
+                  </p>
+                  <p>
+                    Async import using code splitting:
+                    <ConsumerAsyncImport>{thing => thing}</ConsumerAsyncImport>
+                  </p>
+                  <p>
+                    Error, does not load:
+                    <ConsumerError>{thing => thing}</ConsumerError>
+                  </p>
+                </div>
+              </ProviderError>
+            </ProviderAsyncImport>
+          </ProviderDelay>
+        </ProviderSimple>
+      </div>
     );
   }
 }

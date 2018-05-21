@@ -5,9 +5,9 @@ import LoadingEmpty from "./loading/empty";
 import { type Props as LoadingProps } from "./loading";
 
 type Props = {
-  children: React.Node,
+  children: (data?: mixed) => ?React.Element<*>,
   consumer: React.ComponentType<{
-    children: (data: mixed) => React.Node
+    children: (value?: { [string]: mixed }) => ?React.Element<*>
   }>
 };
 
@@ -21,9 +21,17 @@ export default class DirectConsumer extends React.Component<Props, State> {
     const { consumer: Consumer, children } = this.props;
     return (
       <Consumer>
-        {(data: mixed) => {
-          if (data !== null && data !== undefined) {
-            return children(data);
+        {(value?: { [string]: mixed }) => {
+          if (value !== null && value !== undefined) {
+            if ("data" in value) {
+              if (value.data !== null && value.data !== undefined) {
+                return children(value.data);
+              } else {
+                return null;
+              }
+            } else {
+              return null;
+            }
           } else {
             return null;
           }

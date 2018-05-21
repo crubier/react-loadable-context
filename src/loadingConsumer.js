@@ -5,7 +5,7 @@ import LoadingEmpty from "./loading/empty";
 import { type Props as LoadingProps } from "./loading";
 
 type Props = {
-  children: React.Node,
+  children: (data?: mixed) => ?React.Element<*>,
   consumer: React.ComponentType<{
     children: ({
       data: mixed,

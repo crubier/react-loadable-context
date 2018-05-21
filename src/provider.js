@@ -9,7 +9,14 @@ type Props = {
   timeOut: number,
   children: React.Node,
   provider: React.ComponentType<{
-    data: mixed
+    value: {
+      data: mixed,
+      error: mixed,
+      loading: boolean,
+      timedOut: boolean,
+      pastDelay: boolean,
+      retry: mixed => mixed
+    }
   }>
 };
 
@@ -22,9 +29,10 @@ type State = {
 
 export default class Provider extends React.Component<Props, State> {
   startLoading: () => void;
-  load: () => Promise<void>;
+  loadLoader: () => Promise<void>;
   manageDelay: () => Promise<void>;
   manageTimeOut: () => Promise<void>;
+  mounted: boolean;
   static defaultProps = {
     delay: 300,
     timeOut: 30000,
@@ -33,7 +41,7 @@ export default class Provider extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.startLoading = this._startLoading.bind(this);
-    this.load = this._load.bind(this);
+    this.loadLoader = this._loadLoader.bind(this);
     this.manageDelay = this._manageDelay.bind(this);
     this.manageTimeOut = this._manageTimeOut.bind(this);
     this.state = {
@@ -42,27 +50,38 @@ export default class Provider extends React.Component<Props, State> {
       timedOut: false,
       pastDelay: false
     };
+    this.mounted = false;
   }
   componentDidMount() {
+    this.mounted = true;
     this.startLoading();
   }
-  _startLoading() {
-    this.setState({
-      data: null,
-      error: null,
-      timedOut: false,
-      pastDelay: false
-    });
-    this.load();
-    this.manageDelay();
-    this.manageTimeOut();
+  componentWillUnmount() {
+    this.mounted = false;
   }
-  async _load() {
+  _startLoading() {
+    if (this.mounted) {
+      this.setState({
+        data: null,
+        error: null,
+        timedOut: false,
+        pastDelay: false
+      });
+      this.loadLoader();
+      this.manageDelay();
+      this.manageTimeOut();
+    }
+  }
+  async _loadLoader() {
     try {
       const loaded = await this.props.loader(this.props);
-      this.setState({ data: loaded });
+      if (this.mounted) {
+        this.setState({ data: loaded });
+      }
     } catch (e) {
-      this.setState({ error: e });
+      if (this.mounted) {
+        this.setState({ error: e });
+      }
     }
   }
   async _manageDelay() {
@@ -70,7 +89,9 @@ export default class Provider extends React.Component<Props, State> {
     if (this.state.data !== null && this.state.data !== undefined) {
       return;
     } else {
-      this.setState({ pastDelay: true });
+      if (this.mounted) {
+        this.setState({ pastDelay: true });
+      }
     }
   }
   async _manageTimeOut() {
@@ -78,7 +99,9 @@ export default class Provider extends React.Component<Props, State> {
     if (this.state.data !== null && this.state.data !== undefined) {
       return;
     } else {
-      this.setState({ timedOut: true });
+      if (this.mounted) {
+        this.setState({ timedOut: true });
+      }
     }
   }
   render() {
@@ -92,8 +115,7 @@ export default class Provider extends React.Component<Props, State> {
           error,
           loading:
             !(data !== undefined && data !== null) &&
-            error !== undefined &&
-            error !== null,
+            !(error !== undefined && error !== null),
           timedOut,
           pastDelay,
           retry: this.startLoading
