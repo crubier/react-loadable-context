@@ -45,33 +45,68 @@ export default class App extends React.Component<Props> {
   render() {
     return (
       <div>
-        <ProviderSimple>
-          <ProviderDelay>
-            <ProviderAsyncImport>
-              <ProviderError>
-                <div>
-                  Here are a few examples
-                  <p>
-                    Simple:
-                    <ConsumerSimple>{value => value}</ConsumerSimple>
-                  </p>
-                  <p>
-                    Delay:
-                    <ConsumerDelay>{thing => thing}</ConsumerDelay>
-                  </p>
-                  <p>
-                    Async import using code splitting:
-                    <ConsumerAsyncImport>{thing => thing}</ConsumerAsyncImport>
-                  </p>
-                  <p>
-                    Error, does not load:
-                    <ConsumerError>{thing => thing}</ConsumerError>
-                  </p>
-                </div>
-              </ProviderError>
-            </ProviderAsyncImport>
-          </ProviderDelay>
-        </ProviderSimple>
+        <section>
+          <h1>Here are a few examples</h1>
+          <ProviderSimple>
+            <ProviderDelay>
+              <ProviderAsyncImport>
+                <ProviderError>
+                  <dl>
+                    <dt>Simple:</dt>
+                    <dd>
+                      <ConsumerSimple>{value => value}</ConsumerSimple>
+                    </dd>
+                    <dt>Delay:</dt>
+                    <dd>
+                      <ConsumerDelay>{thing => thing}</ConsumerDelay>
+                    </dd>
+                    <dt>Async import using code splitting:</dt>
+                    <dd>
+                      <ConsumerAsyncImport>
+                        {thing => thing}
+                      </ConsumerAsyncImport>
+                    </dd>
+                    <dt> Error, does not load:</dt>
+                    <dd>
+                      <ConsumerError>{thing => thing}</ConsumerError>
+                    </dd>
+                  </dl>
+                </ProviderError>
+              </ProviderAsyncImport>
+            </ProviderDelay>
+          </ProviderSimple>
+        </section>
+        <section>
+          <h1>Here are a few examples</h1>
+          <ProviderSimple>
+            <ProviderDelay>
+              <ProviderAsyncImport>
+                <ProviderError>
+                  <dl>
+                    <dt>Simple:</dt>
+                    <dd>
+                      <ConsumerSimple>{value => value}</ConsumerSimple>
+                    </dd>
+                    <dt>Delay:</dt>
+                    <dd>
+                      <ConsumerDelay>{thing => thing}</ConsumerDelay>
+                    </dd>
+                    <dt>Async import using code splitting:</dt>
+                    <dd>
+                      <ConsumerAsyncImport>
+                        {thing => thing}
+                      </ConsumerAsyncImport>
+                    </dd>
+                    <dt> Error, does not load:</dt>
+                    <dd>
+                      <ConsumerError>{thing => thing}</ConsumerError>
+                    </dd>
+                  </dl>
+                </ProviderError>
+              </ProviderAsyncImport>
+            </ProviderDelay>
+          </ProviderSimple>
+        </section>
       </div>
     );
   }
