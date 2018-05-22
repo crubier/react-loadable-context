@@ -1,6 +1,6 @@
 {
   "name": "react-loadable-context",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Asynchronously load object into react context",
   "main": "dist/index.js",
   "scripts": {
@@ -31,7 +31,7 @@
   "bugs": {
     "url": "https://github.com/crubier/react-loadable-context/issues"
   },
-  "homepage": "https://github.com/crubier/react-loadable-context",
+  "homepage": "https://crubier.github.io/react-loadable-context/",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
