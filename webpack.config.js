@@ -33,7 +33,7 @@ module.exports = {
     }
   },
   output: {
-    path: path.resolve(__dirname, "example/dist"),
+    path: path.resolve(__dirname, "docs"),
     publicPath: "/",
     filename: "bundle.js"
   },
@@ -46,7 +46,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin()
   ],
   devServer: {
-    contentBase: path.resolve(__dirname, "example/dist"),
+    contentBase: path.resolve(__dirname, "docs"),
     hot: true
   }
 };

@@ -22,18 +22,19 @@ export default class Doc extends React.Component<Props> {
           Just like{" "}
           <a target="_blank" href="https://reactjs.org/docs/context.html">
             the new context API
-          </a>, this function returns
-          <ul>
-            <li>
-              A <code>Provider</code>, which injects the loaded object into the
-              context as soon as the promise is resolved
-            </li>
-            <li>
-              Various <code>Consumer</code> components, which gracefully handle
-              loading and error states.
-            </li>
-          </ul>
+          </a>, this function returns:
         </p>
+        <ul>
+          <li>
+            A <code>Provider</code>, which injects the loaded object into the
+            context as soon as the promise is resolved
+          </li>
+          <li>
+            Various <code>Consumer</code> components, which gracefully handle
+            loading and error states.
+          </li>
+        </ul>
+
         <p>
           This is particularly usefull when creating libraries which interface
           react with third party heavy libraries, such as Cesium, vis.js,
@@ -58,10 +59,10 @@ export default class Doc extends React.Component<Props> {
         <h2>Features</h2>
         <ul>
           <li>Fully compliant with the official React context API</li>
+          <li>Super lightweight</li>
           <li>
             Simple API: <a href="#example1">Example 1</a>
           </li>
-
           <li>
             Promise-based asynchronous loading:{" "}
             <a href="#example2">Example 2</a>
