@@ -1,113 +1,32 @@
 /* @flow */
 
 import * as React from "react";
-import delay from "../../src/utils/delay";
-import LoadableContext from "../../src/index";
-import Loading from "./loading";
+
+import Documentation from "./documentation";
+import Example1 from "./example1Simple";
+import Example2 from "./example2Delay";
+import Example3 from "./example3CodeSplitting";
+import Example4 from "./example4Loading";
+import Example5 from "./example5Error";
+import Example6 from "./example6Composition";
+import Example7 from "./example7ConsumerRaw";
 
 type Props = {};
-
-const { Provider: ProviderSimple, Consumer: ConsumerSimple } = LoadableContext({
-  loader: async () => {
-    return "Loaded simply.";
-  }
-});
-
-const { Provider: ProviderDelay, Consumer: ConsumerDelay } = LoadableContext({
-  loader: async () => {
-    await delay(3000);
-    return "Loaded after a delay and detailed info.";
-  },
-  loading: Loading,
-  delay: 1000,
-  timeOut: 2000
-});
-
-const {
-  Provider: ProviderAsyncImport,
-  Consumer: ConsumerAsyncImport
-} = LoadableContext({
-  loader: async () => {
-    return (await import("./thingToLoad")).default;
-  },
-  loading: Loading
-});
-
-const { Provider: ProviderError, Consumer: ConsumerError } = LoadableContext({
-  loader: async () => {
-    await delay(5000);
-    throw new Error("awww");
-  },
-  loading: Loading
-});
 
 export default class App extends React.Component<Props> {
   render() {
     return (
-      <div>
-        <section>
-          <h1>Here are a few examples</h1>
-          <ProviderSimple>
-            <ProviderDelay>
-              <ProviderAsyncImport>
-                <ProviderError>
-                  <dl>
-                    <dt>Simple:</dt>
-                    <dd>
-                      <ConsumerSimple>{value => value}</ConsumerSimple>
-                    </dd>
-                    <dt>Delay:</dt>
-                    <dd>
-                      <ConsumerDelay>{thing => thing}</ConsumerDelay>
-                    </dd>
-                    <dt>Async import using code splitting:</dt>
-                    <dd>
-                      <ConsumerAsyncImport>
-                        {thing => thing}
-                      </ConsumerAsyncImport>
-                    </dd>
-                    <dt> Error, does not load:</dt>
-                    <dd>
-                      <ConsumerError>{thing => thing}</ConsumerError>
-                    </dd>
-                  </dl>
-                </ProviderError>
-              </ProviderAsyncImport>
-            </ProviderDelay>
-          </ProviderSimple>
-        </section>
-        <section>
-          <h1>Here are a few examples</h1>
-          <ProviderSimple>
-            <ProviderDelay>
-              <ProviderAsyncImport>
-                <ProviderError>
-                  <dl>
-                    <dt>Simple:</dt>
-                    <dd>
-                      <ConsumerSimple>{value => value}</ConsumerSimple>
-                    </dd>
-                    <dt>Delay:</dt>
-                    <dd>
-                      <ConsumerDelay>{thing => thing}</ConsumerDelay>
-                    </dd>
-                    <dt>Async import using code splitting:</dt>
-                    <dd>
-                      <ConsumerAsyncImport>
-                        {thing => thing}
-                      </ConsumerAsyncImport>
-                    </dd>
-                    <dt> Error, does not load:</dt>
-                    <dd>
-                      <ConsumerError>{thing => thing}</ConsumerError>
-                    </dd>
-                  </dl>
-                </ProviderError>
-              </ProviderAsyncImport>
-            </ProviderDelay>
-          </ProviderSimple>
-        </section>
-      </div>
+      <section>
+        <h1>React-Loadable-Context</h1>
+        <Documentation />
+        <Example1 />
+        <Example2 />
+        <Example3 />
+        <Example4 />
+        <Example5 />
+        <Example6 />
+        <Example7 />
+      </section>
     );
   }
 }

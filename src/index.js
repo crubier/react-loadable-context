@@ -2,8 +2,10 @@
 
 import * as React from "react";
 import ProviderComponent from "./provider";
-import LoadingConsumerComponent from "./loadingConsumer";
-import DirectConsumerComponent from "./directConsumer";
+import ConsumerDirectComponent from "./consumer/direct";
+import ConsumerDirectLoadingComponent from "./consumer/directLoading";
+import ConsumerRawComponent from "./consumer/raw";
+import ConsumerRawLoadingComponent from "./consumer/rawLoading";
 import { type Props as LoadingProps } from "./loading";
 
 export default function LoadableContext({
@@ -33,21 +35,33 @@ export default function LoadableContext({
       {...props}
     />
   );
-  const LoadingConsumer = (props: mixed) => (
-    <LoadingConsumerComponent
+  const ConsumerDirect = (props: mixed) => (
+    <ConsumerDirectComponent consumer={RawConsumer} {...props} />
+  );
+  const ConsumerDirectLoading = (props: mixed) => (
+    <ConsumerDirectLoadingComponent
       consumer={RawConsumer}
       loading={loading}
       {...props}
     />
   );
-  const DirectConsumer = (props: mixed) => (
-    <DirectConsumerComponent consumer={RawConsumer} {...props} />
+  const ConsumerRaw = (props: mixed) => (
+    <ConsumerRawComponent consumer={RawConsumer} {...props} />
+  );
+  const ConsumerRawLoading = (props: mixed) => (
+    <ConsumerRawLoadingComponent
+      consumer={RawConsumer}
+      loading={loading}
+      {...props}
+    />
   );
   return {
-    Provider: Provider,
-    Consumer: DirectConsumer,
-    DirectConsumer: DirectConsumer,
-    LoadingConsumer: LoadingConsumer,
-    RawConsumer: RawConsumer
+    Provider,
+    Consumer: ConsumerDirect,
+    ConsumerLoading: ConsumerDirectLoading,
+    ConsumerDirect,
+    ConsumerDirectLoading,
+    ConsumerRaw,
+    ConsumerRawLoading
   };
 }

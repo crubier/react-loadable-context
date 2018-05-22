@@ -3,12 +3,17 @@
 import * as React from "react";
 import { type Props } from "./index";
 
-export default function LoadingBasic(props: Props) {
+export default function LoadingFull(props: Props) {
   if (props.loading) {
     // Nominal loading is going on
     if (props.timedOut) {
       // Timeout, user may want to retry
-      return <button onClick={props.retry}>Retry</button>;
+      return (
+        <div>
+          Loading is taking longer than expected
+          <button onClick={props.retry}>Retry</button>
+        </div>
+      );
     } else if (props.pastDelay) {
       // Displaying the loading indicator
       return <div>Loading...</div>;

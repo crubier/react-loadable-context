@@ -1,7 +1,8 @@
 /* @flow */
 
 import * as React from "react";
-import delay from "./utils/delay";
+import delay from "../utils/delay";
+import isPromise from "../utils/isPromise";
 
 type Props = {
   loader: mixed => Promise<mixed>,
@@ -74,7 +75,13 @@ export default class Provider extends React.Component<Props, State> {
   }
   async _loadLoader() {
     try {
-      const loaded = await this.props.loader(this.props);
+      const loadee = this.props.loader(this.props);
+      let loaded;
+      if (isPromise(loadee)) {
+        loaded = await loadee;
+      } else {
+        loaded = loadee;
+      }
       if (this.mounted) {
         this.setState({ data: loaded });
       }

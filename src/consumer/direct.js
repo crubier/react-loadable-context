@@ -1,8 +1,8 @@
 /* @flow */
 
 import * as React from "react";
-import LoadingEmpty from "./loading/empty";
-import { type Props as LoadingProps } from "./loading";
+import LoadingEmpty from "../loading/empty";
+import { type Props as LoadingProps } from "../loading";
 
 type Props = {
   children: (data?: mixed) => ?React.Element<*>,
@@ -13,7 +13,7 @@ type Props = {
 
 type State = {};
 
-export default class DirectConsumer extends React.Component<Props, State> {
+export default class ConsumerDirect extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
   }

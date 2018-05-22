@@ -1,8 +1,8 @@
 /* @flow */
 
 import * as React from "react";
-import LoadingEmpty from "./loading/empty";
-import { type Props as LoadingProps } from "./loading";
+import LoadingEmpty from "../loading/empty";
+import { type Props as LoadingProps } from "../loading";
 
 type Props = {
   children: (data?: mixed) => ?React.Element<*>,
@@ -21,7 +21,7 @@ type Props = {
 
 type State = {};
 
-export default class LoadingConsumer extends React.Component<Props, State> {
+export default class ConsumerRawLoading extends React.Component<Props, State> {
   static defaultProps = {
     loading: () => null
   };
@@ -49,7 +49,7 @@ export default class LoadingConsumer extends React.Component<Props, State> {
               data !== undefined &&
               !(error !== null && error !== undefined)
             ) {
-              return children(data);
+              return children(value);
             } else {
               return (
                 <Loading
