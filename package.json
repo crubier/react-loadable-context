@@ -16,7 +16,15 @@
     "type": "git",
     "url": "git+https://github.com/crubier/react-loadable-context.git"
   },
-  "keywords": ["react"],
+  "keywords": [
+    "react",
+    "async",
+    "context",
+    "loadable",
+    "loader",
+    "code splitting",
+    "context API"
+  ],
   "author":
     "Vincent Lecrubier <vincent.lecrubier@gmail.com> (http://www.vincentlecrubier.fr/)",
   "license": "MIT",
