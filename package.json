@@ -1,17 +1,21 @@
 {
   "name": "react-loadable-context",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Asynchronously load object into react context",
   "main": "dist/index.js",
   "scripts": {
-    "example-start":
-      "webpack-dev-server --config ./webpack.config.js --mode development",
+    "example-start": "webpack-dev-server --config ./webpack.config.js --mode development",
     "example-build": "webpack --config ./webpack.config.js --mode production",
     "dist-build": "babel src -d dist",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublish": "npm run dist-build && npm run example-build"
   },
-  "files": [".babelrc", ".flowconfig", "webpack.config.js", "dist/**"],
+  "files": [
+    ".babelrc",
+    ".flowconfig",
+    "webpack.config.js",
+    "dist/**"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/crubier/react-loadable-context.git"
@@ -25,8 +29,7 @@
     "code splitting",
     "context API"
   ],
-  "author":
-    "Vincent Lecrubier <vincent.lecrubier@gmail.com> (http://www.vincentlecrubier.fr/)",
+  "author": "Vincent Lecrubier <vincent.lecrubier@gmail.com> (http://www.vincentlecrubier.fr/)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/crubier/react-loadable-context/issues"
