@@ -84,6 +84,26 @@ export default class Doc extends React.Component<Props> {
             Fully customizable rendering: <a href="#example7">Example 7</a>
           </li>
         </ul>
+
+        <h2>Links</h2>
+        <ul>
+          <li>
+            <a
+              target="_blank"
+              href="https://github.com/crubier/react-loadable-context"
+            >
+              Sources on github
+            </a>
+          </li>
+          <li>
+            <a
+              target="_blank"
+              href="https://www.npmjs.com/package/react-loadable-context"
+            >
+              NPM page
+            </a>
+          </li>
+        </ul>
       </section>
     );
   }
