@@ -1,7 +1,9 @@
 /* @flow */
 
 import * as React from "react";
-import { type Props } from "./index";
+import type { ContextType } from "../types";
+
+type Props = ContextType;
 
 export default function LoadingRetryButton(props: Props) {
   if (props.loading) {

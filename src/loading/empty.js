@@ -1,8 +1,10 @@
 /* @flow */
 
 import * as React from "react";
-import { type Props } from "./index";
+import type { ContextType } from "../types";
 
-export default function LoadingEmpty(props: Props) {
+type Props = ContextType;
+
+export default function LoadingEmpty(props: ContextType) {
   return null;
 }

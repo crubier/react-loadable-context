@@ -83,6 +83,10 @@ export default class Doc extends React.Component<Props> {
           <li>
             Fully customizable rendering: <a href="#example7">Example 7</a>
           </li>
+          <li>
+            Direct advanced state manipulation:{" "}
+            <a href="#example8">Example 8</a>
+          </li>
         </ul>
 
         <h2>Links</h2>

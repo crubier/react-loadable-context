@@ -1,13 +1,12 @@
 /* @flow */
 
 import * as React from "react";
-import LoadingEmpty from "../loading/empty";
-import { type Props as LoadingProps } from "../loading";
+import type { ContextType } from "../types";
 
 type Props = {
-  children: (value?: { [string]: mixed }) => ?React.Element<*>,
+  children: (value?: ContextType) => ?React.Element<*>,
   consumer: React.ComponentType<{
-    children: (value?: { [string]: mixed }) => ?React.Element<*>
+    children: (value?: ContextType) => ?React.Element<*>
   }>
 };
 
@@ -19,8 +18,6 @@ export default class ConsumerRaw extends React.Component<Props, State> {
   }
   render() {
     const { consumer: Consumer, children } = this.props;
-    return (
-      <Consumer>{(value?: { [string]: mixed }) => children(value)}</Consumer>
-    );
+    return <Consumer>{(value?: ContextType) => children(value)}</Consumer>;
   }
 }

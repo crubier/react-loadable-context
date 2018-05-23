@@ -2,21 +2,14 @@
 
 import * as React from "react";
 import LoadingEmpty from "../loading/empty";
-import { type Props as LoadingProps } from "../loading";
+import type { ContextType, Loaded } from "../types";
 
 type Props = {
-  children: (data?: mixed) => ?React.Element<*>,
+  children: (data?: Loaded) => ?React.Element<*>,
   consumer: React.ComponentType<{
-    children: ({
-      data: mixed,
-      error: mixed,
-      retry: mixed => mixed,
-      loading: boolean,
-      timedOut: boolean,
-      pastDelay: boolean
-    }) => React.Node
+    children: (value?: ContextType) => React.Node
   }>,
-  loading: React.ComponentType<LoadingProps>
+  loading: React.ComponentType<ContextType>
 };
 
 type State = {};
@@ -35,18 +28,9 @@ export default class ConsumerDirectLoading extends React.Component<
     const { consumer: Consumer, children, loading: Loading } = this.props;
     return (
       <Consumer>
-        {(
-          value: ?{
-            data: mixed,
-            error: mixed,
-            retry: mixed => mixed,
-            loading: boolean,
-            timedOut: boolean,
-            pastDelay: boolean
-          }
-        ) => {
+        {(value?: ContextType) => {
           if (value !== null && value !== undefined) {
-            const { data, error, retry, loading, timedOut, pastDelay } = value;
+            const { data, error } = value;
             if (
               data !== null &&
               data !== undefined &&
@@ -54,48 +38,12 @@ export default class ConsumerDirectLoading extends React.Component<
             ) {
               return children(data);
             } else {
-              return (
-                <Loading
-                  retry={retry}
-                  error={error}
-                  loading={loading}
-                  timedOut={timedOut}
-                  pastDelay={pastDelay}
-                />
-              );
+              return <Loading {...value} />;
             }
           } else {
             return null;
           }
-        }
-
-        // {
-        //
-        //   if (
-        //     (data !== null && data !== undefined) ||
-        //     (Loading === null || Loading === undefined)
-        //   ) {
-        //     return children({
-        //       data,
-        //       error,
-        //       retry,
-        //       loading,
-        //       timedOut,
-        //       pastDelay
-        //     });
-        //   } else {
-        //     return (
-        //       <Loading
-        //         retry={retry}
-        //         loading={loading}
-        //         error={error}
-        //         timedOut={timedOut}
-        //         pastDelay={pastDelay}
-        //       />
-        //     );
-        //   }
-        // }
-        }
+        }}
       </Consumer>
     );
   }

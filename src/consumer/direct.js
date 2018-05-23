@@ -1,13 +1,12 @@
 /* @flow */
 
 import * as React from "react";
-import LoadingEmpty from "../loading/empty";
-import { type Props as LoadingProps } from "../loading";
+import type { ContextType, Loaded } from "../types";
 
 type Props = {
-  children: (data?: mixed) => ?React.Element<*>,
+  children: (data?: Loaded) => ?React.Element<*>,
   consumer: React.ComponentType<{
-    children: (value?: { [string]: mixed }) => ?React.Element<*>
+    children: (value?: ContextType) => ?React.Element<*>
   }>
 };
 
@@ -21,7 +20,7 @@ export default class ConsumerDirect extends React.Component<Props, State> {
     const { consumer: Consumer, children } = this.props;
     return (
       <Consumer>
-        {(value?: { [string]: mixed }) => {
+        {(value?: ContextType) => {
           if (value !== null && value !== undefined) {
             if ("data" in value) {
               if (value.data !== null && value.data !== undefined) {

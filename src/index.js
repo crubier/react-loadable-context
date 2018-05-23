@@ -6,21 +6,18 @@ import ConsumerDirectComponent from "./consumer/direct";
 import ConsumerDirectLoadingComponent from "./consumer/directLoading";
 import ConsumerRawComponent from "./consumer/raw";
 import ConsumerRawLoadingComponent from "./consumer/rawLoading";
-import { type Props as LoadingProps } from "./loading";
+import type { LoadableContextFunctionArgs, ContextType } from "./types";
 
 export default function LoadableContext({
   loader,
   loading,
   timeOut,
   delay
-}: {
-  loader: mixed => Promise<mixed>,
-  loading?: React.ComponentType<LoadingProps>,
-  timeOut?: number,
-  delay?: number
-}): {
+}: LoadableContextFunctionArgs): {
   Provider: React.ComponentType<{ children: React.Node }>,
-  Consumer: React.ComponentType<{ children: (value: mixed) => React.Node }>
+  Consumer: React.ComponentType<{
+    children: (value?: ContextType) => React.Node
+  }>
 } {
   const {
     Provider: RawProvider,

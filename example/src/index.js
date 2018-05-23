@@ -5,4 +5,6 @@ import App from "./app";
 
 ReactDOM.render(<App />, document.getElementById("app"));
 
-module.hot.accept();
+if (process.env.MODE === "development") {
+  module.hot.accept();
+}

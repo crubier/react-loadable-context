@@ -1,14 +1,18 @@
 const webpack = require("webpack");
 const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
-module.exports = {
-  entry: [
-    "babel-polyfill",
-    "react-hot-loader/patch",
-    path.resolve(__dirname, "example/src/index.js")
-  ],
-  devtool: "eval-source-map",
+module.exports = (env, { mode, ...argv }) => ({
+  entry:
+    mode === "development"
+      ? [
+          "babel-polyfill",
+          "react-hot-loader/patch",
+          path.resolve(__dirname, "example/src/index.js")
+        ]
+      : ["babel-polyfill", path.resolve(__dirname, "example/src/index.js")],
+  devtool: mode === "development" ? "eval-source-map" : undefined,
   module: {
     rules: [
       {
@@ -38,15 +42,22 @@ module.exports = {
     filename: "bundle.js"
   },
   plugins: [
+    new webpack.DefinePlugin({
+      "process.env.MODE": `"${mode}"`
+    }),
     new HtmlWebPackPlugin({
       template: path.resolve(__dirname, "example/src/index.html"),
       filename: "./index.html"
     }),
-
-    new webpack.HotModuleReplacementPlugin()
+    mode === "development"
+      ? new webpack.HotModuleReplacementPlugin()
+      : new UglifyJsPlugin()
   ],
-  devServer: {
-    contentBase: path.resolve(__dirname, "docs"),
-    hot: true
-  }
-};
+  devServer:
+    mode === "development"
+      ? {
+          contentBase: path.resolve(__dirname, "docs"),
+          hot: true
+        }
+      : undefined
+});
