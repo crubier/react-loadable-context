@@ -1,6 +1,6 @@
 {
   "name": "react-loadable-context",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Asynchronously load object into react context",
   "main": "dist/index.js",
   "scripts": {
