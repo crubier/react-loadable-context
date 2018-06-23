@@ -87,7 +87,7 @@ export default class Provider extends React.Component<Props, State> {
   }
   async _loadLoader() {
     try {
-      const loadee = this.props.loader();
+      const loadee = this.props.loader(this.props);
       let loaded;
       if (isPromise(loadee)) {
         loaded = await loadee;

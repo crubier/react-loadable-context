@@ -11,6 +11,7 @@ import Example5 from "./example5Error";
 import Example6 from "./example6Composition";
 import Example7 from "./example7ConsumerRaw";
 import Example8 from "./example8State";
+import Example9 from "./example9PropsToLoader";
 
 type Props = {};
 
@@ -28,6 +29,7 @@ export default class App extends React.Component<Props> {
         <Example6 />
         <Example7 />
         <Example8 />
+        <Example9 />
       </section>
     );
   }
